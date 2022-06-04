@@ -75,7 +75,7 @@
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="cad_livro.php">Cadastrar</a></li>
-          <li class="nav-item"> <a class="nav-link" href="cad_livro.php">Atualizar</a></li>
+          <li class="nav-item"> <a class="nav-link" href="atualiza_livro.php">Atualizar</a></li>
         </ul>
       </div>
     </li>

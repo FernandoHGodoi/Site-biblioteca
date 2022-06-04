@@ -39,9 +39,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">CADASTRAR LIVRO</h4>
+                                <!-- CONEXAO COM O BANCO -->
+                                <?php include 'conexao.php' ?>
 
                                 <!-- INICIO FORM -->
-                                <form  id="cad_livro" class="form-sample" method="post">
+                                <form action="envia_cad_livro.php" class="form-sample" method="post">
 
                                     <!-- SESSÃO INFORMAÇÕES DO LIVRO -->
                                     <p class="card-description"> INFORMAÇÕES DO LIVRO </p>
@@ -52,18 +54,27 @@
                                         <!-- TITULO DO LIVRO -->
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label for="titulo" class="col-sm-3 col-form-label">Título</label>
+                                                <label for="titulo" class="col-sm-3 col-form-label">Título *</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" id="titulo" name="titulo" class="form-control" />
+                                                    <input type="text" id="titulo" name="nm_livro" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- AUTOR -->
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label for="autor" class="col-sm-3 col-form-label">Autor</label>
+                                                <label for="autor" class="col-sm-3 col-form-label">Autor *</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" id="autor" name="autor" class="form-control"/>
+                                                    <select type="text" id="autor" name="autor_id" class="form-control" required >
+                                                        <option value="">- Selecione o autor -</option>
+                                                        <?php
+                                                            $result_autor = "SELECT `autor_id`, `nm_autor` FROM `autor`";
+                                                            $resultado2 = mysqli_query($conn, $result_autor);
+                                                            while($row_resultado = mysqli_fetch_assoc($resultado2)){ ?>
+                                                                <option value="<?php echo $row_resultado['autor_id']; ?>"><?php echo $row_resultado['nm_autor']; ?></option> <?php
+                                                            }
+                                                        ?>
+                                                    </select> 
                                                 </div>
                                             </div>
                                         </div>
@@ -76,18 +87,27 @@
                                         <!-- EDITORA -->
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label for="editora" class="col-sm-3 col-form-label">Editora</label>
+                                                <label for="editora" class="col-sm-3 col-form-label">Editora *</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" id="editora" name="editora" class="form-control"/>
+                                                    <select type="text" id="editora" name="editora_id" class="form-control" required>
+                                                        <option>- Selecione a editora -</option>
+                                                        <?php
+                                                            $result_editora = "SELECT `editora_id`, `nm_editora` FROM `editora`";
+                                                            $resultado = mysqli_query($conn, $result_editora);
+                                                            while($row_resultado = mysqli_fetch_assoc($resultado)){ ?>
+                                                                <option value="<?php echo $row_resultado['editora_id']; ?>"><?php echo $row_resultado['nm_editora']; ?></option> <?php
+                                                            }
+                                                        ?>
+                                                    </select> 
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- ANO -->
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label for="ano" class="col-sm-3 col-form-label">Ano</label>
+                                                <label for="ano" class="col-sm-3 col-form-label">Ano *</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" id="ano" name="ano" class="form-control"/>
+                                                    <input type="text" id="ano" name="ano" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,9 +143,9 @@
                                         <!-- VALOR ALUGUEL -->
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label for="vl_aluguel" class="col-sm-3 col-form-label">Valor aluguel</label>
+                                                <label for="vl_aluguel" class="col-sm-3 col-form-label">Valor aluguel *</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" id="vl_aluguel" name="vl_aluguel" class="form-control" placeholder="R$"/>
+                                                    <input type="text" id="vl_aluguel" name="preco" class="form-control" placeholder="R$"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,9 +153,9 @@
                                         <!-- QUANTIDADE -->
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label for="qtd" class="col-sm-3 col-form-label">Quantidade</label>
+                                                <label for="qtd" class="col-sm-3 col-form-label">Quantidade *</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" id="qtd" name="qtd" class="form-control" />
+                                                    <input type="text" id="qtd" name="quantidade" class="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -145,13 +165,14 @@
                                     <div class="row">
 
                                         <div class="col-md-3">
-                                            <button form_id="cad_livro" type="submit" class="btn btn-primary mr-2">Cadastrar</button>
+                                            <button type="submit" class="btn btn-primary mr-2">Cadastrar</button>
                                             <button class="btn btn-dark">Cancelar</button>
                                         </div>
                                     </div>
                                     <!-- FIM LINHA 2 -->
                                 </form>
                                 <!-- FIM FORM -->
+                               
                             </div>
                         </div>
                     </div>
