@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="PT-BR">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -21,12 +21,12 @@
     <link rel="shortcut icon" href="assets/images/book-open-solid.svg" />
 
     <!-- CSS DATA TABLES -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-<style>
-    td {color: yellow !important;}
-    select.form-select.form-select-sm {color: white !important;}
-</style>
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet">
+    <link href="../../extensions/Editor/css/editor.dataTables.min.css" rel="stylesheet">
+
   </head>
   <body>
     <div class="container-scroller">
@@ -37,6 +37,46 @@
         <!-- partial:partials/_navbar.php -->
         <?php include 'partials/_navbar.php' ?>
         <!-- partial -->
+
+        <?php
+        
+            // DataTables PHP library
+            include( "../lib/DataTables.php" );
+            
+            // Alias Editor classes so they are easy to use
+            use
+                DataTables\Editor,
+                DataTables\Editor\Field,
+                DataTables\Editor\Format,
+                DataTables\Editor\Mjoin,
+                DataTables\Editor\Options,
+                DataTables\Editor\Upload,
+                DataTables\Editor\Validate,
+                DataTables\Editor\ValidateOptions;
+            
+            
+            /*
+            * Example PHP implementation used for the join.html example
+            */
+            Editor::inst( $db, 'livro' )
+                ->field(
+                    Field::inst( 'livro.nm_livro' ),
+                    Field::inst( 'livro.last_name' ),
+                    Field::inst( 'livro.phone' ),
+                    Field::inst( 'livro.site' )
+                        ->options( Options::inst()
+                            ->table( 'nm_livro' )
+                            ->value( 'id' )
+                            ->label( 'name' )
+                        )
+                        ->validator( Validate::dbValues() ),
+                    Field::inst( 'sites.name' )
+                )
+                ->leftJoin( 'sites', 'sites.id', '=', 'users.site' )
+                ->process($_POST)
+                ->json();
+            ?>
+
         <div class="main-panel">
             <div class="content-wrapper">
                 
@@ -50,50 +90,21 @@
                                 <?php include 'conexao.php' ?>
 
                                 <!-- INICIO DA TABLE -->
-                                <table id="atualiza_livro" class="table table-striped" style="width:100%">
+                                <table id="tabela" class="display" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Título</th>
-                                            <th>Autor</th>
-                                            <th>Editora</th>
-                                            <th>Ano</th>
-                                            <th>Sinopse</th>
-                                            <th>Capa</th>
-                                            <th>Valor aluguel</th>
-                                            <th>Quantidade</th>
+                                            <th>First name</th>
+                                            <th>Last name</th>
+                                            <th>Phone #</th>
+                                            <th>Location</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                    <?php
-                                            $result_atualiza_livro = "SELECT `nm_livro`, `autor_id`, `editora_id`, `ano`, `sinopse`, 
-                                            `capa`, `preco`, quantidade FROM `livro`";
-
-                                            $resultado_atualiza_livro = mysqli_query($conn, $result_atualiza_livro);
-                                            
-
-                                            while($rows_resultado = mysqli_fetch_assoc($resultado_atualiza_livro)){ ?>
-                                        <tr>
-                                            <td><?php echo $rows_resultado['nm_livro']; ?></td>
-                                            <td><?php echo $rows_resultado['autor_id']; ?></td>
-                                            <td><?php echo $rows_resultado['editora_id']; ?></td>
-                                            <td><?php echo $rows_resultado['ano']; ?></td>
-                                            <td><?php echo $rows_resultado['sinopse']; ?></td>
-                                            <td><?php echo $rows_resultado['capa']; ?></td>
-                                            <td><?php echo $rows_resultado['preco']; ?></td>
-                                            <td><?php echo $rows_resultado['quantidade']; ?></td>
-                                        </tr>
-                                    <?php } ?>
-                                    </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>Título</th>
-                                            <th>Autor</th>
-                                            <th>Editora</th>
-                                            <th>Ano</th>
-                                            <th>Sinopse</th>
-                                            <th>Capa</th>
-                                            <th>Valor aluguel</th>
-                                            <th>Quantidade</th>
+                                            <th>First name</th>
+                                            <th>Last name</th>
+                                            <th>Phone #</th>
+                                            <th>Location</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -131,9 +142,49 @@
 
     <!-- JAVASCRIPT DATA TABLES -->
     <script>
-        $(document).ready(function () {
-        $('#atualiza_livro').DataTable();
-        });
+        var editor; // use a global for the submit and return data rendering in the examples
+ 
+        $(document).ready(function() {
+            editor = new $.fn.dataTable.Editor( {
+                ajax: "../php/join.php",
+                table: "#example",
+                fields: [ {
+                        label: "First name:",
+                        name: "users.first_name"
+                    }, {
+                        label: "Last name:",
+                        name: "users.last_name"
+                    }, {
+                        label: "Phone #:",
+                        name: "users.phone"
+                    }, {
+                        label: "Site:",
+                        name: "users.site",
+                        type: "datatable",
+                    }
+                ]
+            } );
+        
+            $('#example').DataTable( {
+                dom: "Bfrtip",
+                ajax: {
+                    url: "../php/join.php",
+                    type: 'POST'
+                },
+                columns: [
+                    { data: "users.first_name" },
+                    { data: "users.last_name" },
+                    { data: "users.phone" },
+                    { data: "sites.name" }
+                ],
+                select: true,
+                buttons: [
+                    { extend: "create", editor: editor },
+                    { extend: "edit",   editor: editor },
+                    { extend: "remove", editor: editor }
+                ]
+            } );
+        } );
     </script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
