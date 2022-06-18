@@ -93,7 +93,7 @@
                                             <div class="form-group row">
                                                 <label for="cpf" class="col-sm-3 col-form-label">CPF</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" onkeyup="somenteNumeros(this);" class="form-control" id='cpf' name='cpf' placeholder="___.___.___-__" MAXLENGTH="11" required><span id="resposta"></span>
+                                                    <input type="text" onblur="validarCPF(this.value);" oninput="mascara(this);" class="form-control" id='cpf' name='cpf'>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
                                             <div class="form-group row">
                                                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" id="email" name="email" class="form-control" onblur="validacaoEmail(f1.email)" maxlength="60" size='65' placeholder="exemplo@email.com" required><span id="msgemail"></span>
+                                                    <input type="text" id="email" name="email" class="form-control" onblur="validacaoEmail(f1.email)" maxlength="60" size='65' placeholder="exemplo@email.com" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -210,7 +210,7 @@
                                             <div class="form-group row">
                                                 <label for="senha" class="col-sm-3 col-form-label">Senha</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" id="password1" name="password1" class="form-control" required>
+                                                    <input type="password" id="password1" name="password1" onfocus="validarSenha();" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -220,7 +220,7 @@
                                             <div class="form-group row">
                                                 <label for="senha" class="col-sm-3 col-form-label">Repetir senha</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" id="password2" name="password2" class="form-control" required>
+                                                    <input type="password" id="password2" name="password2" onfocus="validarSenha();" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -380,69 +380,79 @@
     <!-- VALIDAR SENHA -->
     <script>
         //Verifica se as senhas são iguais
-        let senha = document.getElementById('password1');
-        let senhaC = document.getElementById('password2');
+		let senha = document.getElementById('password1');
+		let senhaC = document.getElementById('password2');
 
-        function validarSenha() {
-        if (senha.value != senhaC.value) {
-            senhaC.setCustomValidity("Senhas diferentes!");
+		function validarSenha() {
+		if (senha.value != senhaC.value) {
+			senhaC.setCustomValidity("Senhas diferentes!");
                 $('#Button').prop('disabled', true);
-            senhaC.reportValidity();
-            return false;
-        } else {
-            senhaC.setCustomValidity("");
+			senhaC.reportValidity();
+			return false;
+		} else {
+			senhaC.setCustomValidity("");
                 $('#Button').prop('disabled', false);
-            return true;
-        }
-        }
-        function validarSenha2() {
-        if (senhaC.value != senha.value) {
-            senha.setCustomValidity("Senhas diferentes!");
-                $('#Button').prop('disabled', true);
-            senha.reportValidity();
-            return false;
-        } else {
-            senha.setCustomValidity("");
-                $('#Button').prop('disabled', false);
-            return true;
-        }
-        }
+			return true;
+		}
+		}
+
         // Verificar quando o campo for modificado, para que a mensagem suma quando as senhas forem iguais
         senhaC.addEventListener('input', validarSenha);
     </script>
 
     <!-- VALIDA CPF -->
     <script>
-       function CPF(){"user_strict";function r(r){for(var t=null,n=0;9>n;++n)t+=r.toString().charAt(n)*(10-n);var i=t%11;return i=2>i?0:11-i}function t(r){for(var t=null,n=0;10>n;++n)t+=r.toString().charAt(n)*(11-n);var i=t%11;return i=2>i?0:11-i}var n="CPF Inválido",i="CPF Válido";this.gera=function(){for(var n="",i=0;9>i;++i)n+=Math.floor(9*Math.random())+"";var o=r(n),a=n+"-"+o+t(n+""+o);return a},this.valida=function(o){for(var a=o.replace(/\D/g,""),u=a.substring(0,9),f=a.substring(9,11),v=0;10>v;v++)if(""+u+f==""+v+v+v+v+v+v+v+v+v+v+v)return n;var c=r(u),e=t(u+""+c);return f.toString()===c.toString()+e.toString()?i:n}}
-        var CPF = new CPF();
-        //document.write(CPF.valida("123.456.789-00"));
-        //document.write("<br> Utilizando o proprio gerador da lib<br><br><br>");
-        for(var i =0;i<40;i++) {
-        var temp_cpf = CPF.gera();
-        //document.write(temp_cpf+" = "+CPF.valida(temp_cpf)+"<br>");
-        }
-        $("#cpf").keypress(function(){
-            $("#resposta").html(CPF.valida($(this).val()));
-        });
-        $("#cpf").blur(function(){
-        $("#resposta").html(CPF.valida($(this).val()));
-        var x = $("#resposta").text();
-        if (x == "CPF Inválido")
-            {
-                $('#Button').prop('disabled', true);
-            }else{
-                $('#Button').prop('disabled', false);
+        // Mascara de texto CPF	
+        function mascara(i){
+            var v = i.value;
+            
+            if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+                i.value = v.substring(0, v.length-1);
+                return;
             }
-        });
-        
-        function somenteNumeros(num) {
-        var er = /[^0-9]/;
-        er.lastIndex = 0;
-        var campo = num;
-        if (er.test(campo.value)) {
-          campo.value = "";
+            
+            i.setAttribute("maxlength", "14"); // adiciona o limite máximo de caracter de 14
+            if (v.length == 3 || v.length == 7) i.value += "."; //conta até o 3º caracter e adicionar um "." após
+            if (v.length == 11) i.value += "-"; //conta até o 11º caracter e adicionar um "-" após
         }
-    }
+
+        // Validar CPF	
+        function validarCPF(cpf) {	
+            cpf = cpf.replace(/[^\d]+/g,'');	
+            if(cpf == '') return false;	
+            // Elimina CPFs invalidos conhecidos	
+            if (cpf.length != 11 || 
+                cpf == "00000000000" || 
+                cpf == "11111111111" || 
+                cpf == "22222222222" || 
+                cpf == "33333333333" || 
+                cpf == "44444444444" || 
+                cpf == "55555555555" || 
+                cpf == "66666666666" || 
+                cpf == "77777777777" || 
+                cpf == "88888888888" || 
+                cpf == "99999999999")
+                    return alert('CPF Invalido');		
+            // Valida 1o digito	
+            add = 0;	
+            for (i=0; i < 9; i ++)		
+                add += parseInt(cpf.charAt(i)) * (10 - i);	
+                rev = 11 - (add % 11);	
+                if (rev == 10 || rev == 11)		
+                    rev = 0;	
+                if (rev != parseInt(cpf.charAt(9)))		
+                    return alert('CPF Invalido');		
+            // Valida 2o digito	
+            add = 0;	
+            for (i = 0; i < 10; i ++)		
+                add += parseInt(cpf.charAt(i)) * (11 - i);	
+            rev = 11 - (add % 11);	
+            if (rev == 10 || rev == 11)	
+                rev = 0;	
+            if (rev != parseInt(cpf.charAt(10)))
+                return alert('CPF Invalido');		
+            return true;   
+        }
     </script>
 
     <!-- MASCARAS -->
@@ -494,12 +504,13 @@
                 (dominio.search(".")!=-1) &&
                 (dominio.indexOf(".") >=1)&&
                 (dominio.lastIndexOf(".") < dominio.length - 1)) {
-                document.getElementById("msgemail").innerHTML="E-mail válido";
+                //document.getElementById("msgemail").innerHTML="E-mail válido";
                 $('#Button').prop('disabled', false);
             }
             else{
-                document.getElementById("msgemail").innerHTML="E-mail inválido";
-                $('#Button').prop('disabled', true);
+                //document.getElementById("msgemail").innerHTML="E-mail inválido";
+                $('#Button').prop('disabled', true); 
+                return alert('Email inválido!');
             }
         }
     </script>

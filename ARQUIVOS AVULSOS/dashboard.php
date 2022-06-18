@@ -20,7 +20,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="assets/images/book-open-solid.svg" />
+    <link rel="icon" type="image/png" href="assets/e-book.png" sizes="32x32"/>
   </head>
   <body>
 
