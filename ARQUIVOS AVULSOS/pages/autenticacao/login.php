@@ -16,37 +16,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
-
-    <script language="Javascript">
-      function validacaoEmail(field) {
-      usuario = field.value.substring(0, field.value.indexOf("@"));
-      dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
-
-      if ((usuario.length >=1) &&
-          (dominio.length >=3) &&
-          (usuario.search("@")==-1) &&
-          (dominio.search("@")==-1) &&
-          (usuario.search(" ")==-1) &&
-          (dominio.search(" ")==-1) &&
-          (dominio.search(".")!=-1) &&
-          (dominio.indexOf(".") >=1)&&
-          (dominio.lastIndexOf(".") < dominio.length - 1)) {
-      document.getElementById("msgemail").innerHTML="E-mail válido";
-      }
-      else{
-      document.getElementById("msgemail").innerHTML="<font color='red'>E-mail inválido </font>";
-      }
-    }
-    </script>
-    <script>
-      $("#login").submit(function() {
-      if($("#email").val()== null || $("#email").val() ==""){
-          alert('campo vazio');      
-          return false;
-      }
-      });
-    </script>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png">
 
   </head>
   <body>
@@ -59,20 +29,18 @@
                 <h3 class="card-title text-center mb-3">Login</h3>
 
                 <!-- INICIO DO FORM -->
-                <form id="login" action="../../index.php" method="post">
+                <form id="login" action="../../dashboard.php" method="post">
 
                   <!-- EMAIL -->
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" id="email" name="email" onblur="validacaoEmail(login.email)" class="form-control p_input">
+                    <input type="email" id="email" name="email" class="form-control p_input" required>
                   </div>
-
-                  <div class="form-group" id="msgemail"></div>
 
                   <!-- SENHA -->
                   <div class="form-group">
                     <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" class="form-control p_input">
+                    <input type="password" id="senha" name="senha" class="form-control p_input" required>
                   </div>
                   <div class="form-group d-flex align-items-center justify-content-between">
                     <a href="redefinir.php" class="forgot-pass">Esqueci a senha</a>
