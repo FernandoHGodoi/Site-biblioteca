@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Maio-2022 às 17:00
+-- Tempo de geração: 18-Jun-2022 às 16:50
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 8.0.12
 
@@ -32,23 +32,8 @@ CREATE TABLE `aluguel` (
   `dt_retirada` date DEFAULT NULL,
   `dt_devolucao` date DEFAULT NULL,
   `livro_id` int(11) DEFAULT NULL,
-  `cpf` int(11) DEFAULT NULL
+  `cliente_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `aluguel`
---
-
-INSERT INTO `aluguel` (`aluguel_id`, `dt_retirada`, `dt_devolucao`, `livro_id`, `cpf`) VALUES
-(1, '2022-04-07', '2022-04-12', 1, 2),
-(2, '2022-04-07', '2022-04-12', 2, 6),
-(3, '2022-04-05', '2022-04-10', 5, 3),
-(4, '2022-04-05', '2022-04-10', 3, 1),
-(5, '2022-04-05', '2022-04-10', 4, 1),
-(6, '2022-04-05', '2022-04-30', 5, 1),
-(7, '2022-04-05', '2022-04-30', 1, 2),
-(8, '2022-04-07', '2022-04-12', 6, 6),
-(9, '2022-03-05', '2022-03-10', 10, 5);
 
 -- --------------------------------------------------------
 
@@ -128,32 +113,37 @@ INSERT INTO `editora` (`editora_id`, `nm_editora`) VALUES
 
 CREATE TABLE `livro` (
   `livro_id` int(11) NOT NULL,
-  `nm_livro` varchar(255) DEFAULT NULL,
+  `nm_livro` varchar(255) NOT NULL,
   `edicao` varchar(255) DEFAULT NULL,
-  `ano_pubicacao` varchar(255) DEFAULT NULL,
+  `ano` varchar(255) DEFAULT NULL,
   `editora_id` int(11) NOT NULL,
-  `categoria_id` int(11) NOT NULL,
+  `categoria_id` int(11) DEFAULT NULL,
   `autor_id` int(11) NOT NULL,
   `capa` blob DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL,
-  `preco` float DEFAULT NULL
+  `preco` float DEFAULT NULL,
+  `sinopse` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `livro`
 --
 
-INSERT INTO `livro` (`livro_id`, `nm_livro`, `edicao`, `ano_pubicacao`, `editora_id`, `categoria_id`, `autor_id`, `capa`, `quantidade`, `preco`) VALUES
-(1, 'Star Wars', '10', NULL, 1, 1, 2, NULL, NULL, NULL),
-(2, 'Guia dos Mochileiros', '2', NULL, 1, 1, 2, NULL, NULL, NULL),
-(3, 'Segunda Guerra', '1', NULL, 2, 3, 3, NULL, NULL, NULL),
-(4, 'Roma', '3', NULL, 3, 3, 4, NULL, NULL, NULL),
-(5, 'Quimica Avançada', '1', NULL, 3, 2, 5, NULL, NULL, NULL),
-(6, 'Laboratório', '10', NULL, 4, 2, 5, NULL, NULL, NULL),
-(7, 'Gramática', '6', NULL, 3, 5, 6, NULL, NULL, NULL),
-(8, 'Gramática 2', '6', '2006', 4, 5, 6, NULL, NULL, NULL),
-(9, 'Matemática Discreta', '5', '2005', 3, 4, 5, NULL, NULL, NULL),
-(10, 'Matemática Avançada', '10', '1998', 4, 4, 5, NULL, NULL, NULL);
+INSERT INTO `livro` (`livro_id`, `nm_livro`, `edicao`, `ano`, `editora_id`, `categoria_id`, `autor_id`, `capa`, `quantidade`, `preco`, `sinopse`) VALUES
+(1, 'Star Wars', '10', NULL, 1, 1, 2, NULL, NULL, NULL, NULL),
+(2, 'Guia dos Mochileiros', '2', NULL, 1, 1, 2, NULL, NULL, NULL, NULL),
+(3, 'Segunda Guerra', '1', NULL, 2, 3, 3, NULL, NULL, NULL, NULL),
+(4, 'Roma', '3', NULL, 3, 3, 4, NULL, NULL, NULL, NULL),
+(5, 'Quimica Avançada', '1', NULL, 3, 2, 5, NULL, NULL, NULL, NULL),
+(6, 'Laboratório', '10', NULL, 4, 2, 5, NULL, NULL, NULL, NULL),
+(7, 'Gramática', '6', NULL, 3, 5, 6, NULL, NULL, NULL, NULL),
+(8, 'Gramática 2', '6', '2006', 4, 5, 6, NULL, NULL, NULL, NULL),
+(9, 'Matemática Discreta', '5', '2005', 3, 4, 5, NULL, NULL, NULL, NULL),
+(10, 'Matemática Avançada', '10', '1998', 4, 4, 5, NULL, NULL, NULL, NULL),
+(13, 'Text', NULL, '1990', 1, NULL, 1, '', 2, 12, 'qweqwewq'),
+(17, 'Exemplo1', NULL, '2000', 4, NULL, 4, '', 22, 19.9, 'Exemplo de form enviada.'),
+(18, 'Livro 1', NULL, '2011', 5, NULL, 8, '', 111, 22, 'Livro 1 exemplo sinopse'),
+(19, 'Testando atualiza livro', NULL, '2022', 1, NULL, 8, '', 1000, 9.99, 'Exte é um teste de atualização de livros.');
 
 -- --------------------------------------------------------
 
@@ -163,32 +153,32 @@ INSERT INTO `livro` (`livro_id`, `nm_livro`, `edicao`, `ano_pubicacao`, `editora
 
 CREATE TABLE `usuario` (
   `usuario_id` int(11) NOT NULL,
-  `nm_usuario` varchar(255) DEFAULT NULL,
-  `sexo` varchar(255) DEFAULT NULL,
-  `cpf` varchar(255) DEFAULT NULL,
-  `dt_nascimento` date DEFAULT NULL,
-  `rua` varchar(255) DEFAULT NULL,
-  `bairro` varchar(255) DEFAULT NULL,
-  `numero` int(11) DEFAULT NULL,
-  `cidade` varchar(255) DEFAULT NULL,
-  `estado` varchar(255) DEFAULT NULL,
+  `nm_usuario` varchar(255) NOT NULL,
+  `sexo` varchar(255) NOT NULL,
+  `cpf` varchar(255) NOT NULL,
+  `dt_nascimento` date NOT NULL,
+  `rua` varchar(255) NOT NULL,
+  `bairro` varchar(255) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `cidade` varchar(255) NOT NULL,
+  `estado` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `telefone` varchar(255) DEFAULT NULL,
-  `tipo_usuario` varchar(255) DEFAULT NULL,
-  `senha` varchar(255) DEFAULT NULL
+  `telefone` varchar(255) NOT NULL,
+  `tipo_usuario` varchar(255) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `palavra_seg` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`usuario_id`, `nm_usuario`, `sexo`, `cpf`, `dt_nascimento`, `rua`, `bairro`, `numero`, `cidade`, `estado`, `email`, `telefone`, `tipo_usuario`, `senha`) VALUES
-(1, 'João Augusto', NULL, NULL, '2002-05-03', 'Rua josé', 'Jardim Paulista', 25, NULL, '', NULL, '(12)99879-9598', NULL, NULL),
-(2, 'Julio Cesar', NULL, NULL, '2005-06-27', 'Rua Manacas', 'Jd. Oriente', 36, NULL, '', NULL, '(11)99595-9595', NULL, NULL),
-(3, 'Waldir Pereira', NULL, NULL, '1999-12-10', 'Rua Figueiras', 'Centro', 42, NULL, '', NULL, '(11)99632-5659', NULL, NULL),
-(4, 'Julia Andrade', NULL, NULL, '1985-11-16', 'Rua Vilaça', 'Jd. das industrias', 1111, NULL, '', NULL, '(12)99526-8549', NULL, NULL),
-(5, 'Maria da Silva', NULL, NULL, '1998-10-25', 'Rua Manacas', 'Centro', 255, NULL, '', NULL, '(12)91232-2659', NULL, NULL),
-(6, 'Marcia Maria', NULL, NULL, '2006-05-04', 'Av Dr. Heitor José', 'Centro', 177, NULL, '', NULL, '(12)99648-9564', NULL, NULL);
+INSERT INTO `usuario` (`usuario_id`, `nm_usuario`, `sexo`, `cpf`, `dt_nascimento`, `rua`, `bairro`, `numero`, `cidade`, `estado`, `email`, `telefone`, `tipo_usuario`, `senha`, `palavra_seg`) VALUES
+(1, 'Fernando', 'Masculino', '38825222831', '2022-06-15', 'Avenida Barbacena', 'Jardim Ismênia', 987, 'São José dos Campos', 'SP', 'fer@gmail.com', '+55 (11) 11111-1111', '3', '12', 'senhafacil'),
+(2, 'João', 'Masculino', '16945487911', '2022-06-30', 'Avenida Barbacena', 'Jardim Ismênia', 987, 'São José dos Campos', 'SP', 'joao@teste.com', '+55 (22) 22222-2222', '1', '123', 'asdasd'),
+(3, 'José', 'Masculino', '67818587349', '2022-06-16', 'Rua do Colégio', 'Água Fria', 1231, 'Recife', 'PE', 'jose@email.com', '+55 (12) 22334-2223', '1', 'c20ad4d76fe97759aa27a0c99bff6710', '12'),
+(4, 'Maria', 'Feminino', '66767116483', '2022-06-08', 'Rua Cícero Dantas', 'Boa Vista II', 452, 'Serra', 'ES', 'maria@email.com', '+55 (43) 72773-2773', '1', '81dc9bdb52d04dc20036dbd8313ed055', '1234'),
+(5, 'Carol', 'Feminino', '14424568687', '2022-06-06', 'Rua da Alegria 2', 'Carapina Grande', 3232, 'Serra', 'ES', 'carol@email.com', '+55 (12) 12121-2323', '2', '202cb962ac59075b964b07152d234b70', '123');
 
 --
 -- Índices para tabelas despejadas
@@ -200,7 +190,7 @@ INSERT INTO `usuario` (`usuario_id`, `nm_usuario`, `sexo`, `cpf`, `dt_nascimento
 ALTER TABLE `aluguel`
   ADD PRIMARY KEY (`aluguel_id`),
   ADD KEY `livro_id` (`livro_id`),
-  ADD KEY `cliente_id` (`cpf`);
+  ADD KEY `cliente_id` (`cliente_id`);
 
 --
 -- Índices para tabela `autor`
@@ -244,7 +234,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `aluguel`
 --
 ALTER TABLE `aluguel`
-  MODIFY `aluguel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `aluguel_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `autor`
@@ -268,13 +258,13 @@ ALTER TABLE `editora`
 -- AUTO_INCREMENT de tabela `livro`
 --
 ALTER TABLE `livro`
-  MODIFY `livro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `livro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restrições para despejos de tabelas
@@ -285,7 +275,7 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `aluguel`
   ADD CONSTRAINT `aluguel_ibfk_1` FOREIGN KEY (`livro_id`) REFERENCES `livro` (`livro_id`),
-  ADD CONSTRAINT `aluguel_ibfk_2` FOREIGN KEY (`cpf`) REFERENCES `usuario` (`usuario_id`);
+  ADD CONSTRAINT `aluguel_ibfk_2` FOREIGN KEY (`cliente_id`) REFERENCES `usuario` (`usuario_id`);
 
 --
 -- Limitadores para a tabela `livro`
