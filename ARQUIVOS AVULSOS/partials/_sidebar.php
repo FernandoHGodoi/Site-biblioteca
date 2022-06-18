@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-    <a class="sidebar-brand brand-logo" href="/template/index.php"><img src="assets/images/logo.svg" alt="logo" /></a>
-    <a class="sidebar-brand brand-logo-mini" href="/template/index.php"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+    <a class="sidebar-brand brand-logo" href="/template/dashboard.php"><img src="assets/images/logo.svg" alt="logo" /></a>
+    <a class="sidebar-brand brand-logo-mini" href="/template/dashboard.php"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
   </div>
   <ul class="nav">
     <li class="nav-item profile">
@@ -57,7 +57,7 @@
       <span class="nav-link">Navegação</span>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="index.php">
+      <a class="nav-link" href="dashboard.php">
         <span class="menu-icon">
           <i class="mdi mdi-speedometer"></i>
         </span>
