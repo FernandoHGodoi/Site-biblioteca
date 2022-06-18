@@ -16,7 +16,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="../../assets/e-book.png" />
 
   </head>
   <body>
@@ -49,7 +49,7 @@
                     <button type="submit" form_id="login" class="btn btn-primary btn-block enter-btn">Login</button>
                   </div>
                   
-                  <p class="sign-up">Não tem uma conta?<a href="cad_funcionario.php"> Cadastre-se</a></p>
+                  <a href="../../index/index.php"><- Voltar a Home</a>
                 </form>
               </div>
             </div>
