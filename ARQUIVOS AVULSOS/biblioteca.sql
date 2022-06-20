@@ -33,7 +33,7 @@ CREATE TABLE `aluguel` (
   `dt_devolucao` date DEFAULT NULL,
   `livro_id` int(11) DEFAULT NULL,
   `cliente_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) 
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,7 @@ CREATE TABLE `autor` (
   `autor_id` int(11) NOT NULL,
   `nm_autor` varchar(255) DEFAULT NULL,
   `dt_nasc` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) 
 
 --
 -- Extraindo dados da tabela `autor`
@@ -70,7 +70,7 @@ INSERT INTO `autor` (`autor_id`, `nm_autor`, `dt_nasc`) VALUES
 CREATE TABLE `categoria` (
   `categoria_id` int(11) NOT NULL,
   `descricao` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) 
 
 --
 -- Extraindo dados da tabela `categoria`
@@ -92,7 +92,7 @@ INSERT INTO `categoria` (`categoria_id`, `descricao`) VALUES
 CREATE TABLE `editora` (
   `editora_id` int(11) NOT NULL,
   `nm_editora` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
 
 --
 -- Extraindo dados da tabela `editora`
@@ -123,23 +123,23 @@ CREATE TABLE `livro` (
   `quantidade` int(11) DEFAULT NULL,
   `preco` float DEFAULT NULL,
   `sinopse` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) 
 
 --
 -- Extraindo dados da tabela `livro`
 --
 
 INSERT INTO `livro` (`livro_id`, `nm_livro`, `edicao`, `ano`, `editora_id`, `categoria_id`, `autor_id`, `capa`, `quantidade`, `preco`, `sinopse`) VALUES
-(1, 'Star Wars', '10', NULL, 1, 1, 2, NULL, NULL, NULL, NULL),
-(2, 'Guia dos Mochileiros', '2', NULL, 1, 1, 2, NULL, NULL, NULL, NULL),
-(3, 'Segunda Guerra', '1', NULL, 2, 3, 3, NULL, NULL, NULL, NULL),
-(4, 'Roma', '3', NULL, 3, 3, 4, NULL, NULL, NULL, NULL),
-(5, 'Quimica Avançada', '1', NULL, 3, 2, 5, NULL, NULL, NULL, NULL),
-(6, 'Laboratório', '10', NULL, 4, 2, 5, NULL, NULL, NULL, NULL),
-(7, 'Gramática', '6', NULL, 3, 5, 6, NULL, NULL, NULL, NULL),
-(8, 'Gramática 2', '6', '2006', 4, 5, 6, NULL, NULL, NULL, NULL),
-(9, 'Matemática Discreta', '5', '2005', 3, 4, 5, NULL, NULL, NULL, NULL),
-(10, 'Matemática Avançada', '10', '1998', 4, 4, 5, NULL, NULL, NULL, NULL),
+(1, 'Star Wars', '10', 2000, 1, 1, 2, NULL, 2, 50.00, NULL),
+(2, 'Guia dos Mochileiros', '2', 2000, 1, 1, 2, NULL, 5, 5.00, NULL),
+(3, 'Segunda Guerra', '1', 2000, 2, 3, 3, NULL, 5, 2.50, NULL),
+(4, 'Roma', '3', 2000, 3, 3, 4, NULL, 5, 2.50, NULL),
+(5, 'Quimica Avançada', '1', 2020, 3, 2, 5, NULL, 10, 5.00, NULL),
+(6, 'Laboratório', '10', 2020, 4, 2, 5, NULL, 10, 5.00, NULL),
+(7, 'Gramática', '6', 2020, 3, 5, 6, NULL, 1, 2.00, NULL),
+(8, 'Gramática 2', '6', '2006', 4, 5, 6, NULL, 1, 2.00, NULL),
+(9, 'Matemática Discreta', '5', '2005', 3, 4, 5, NULL, 1, 2.00, NULL),
+(10, 'Matemática Avançada', '10', '1998', 4, 4, 5, NULL, 1, 19.90, NULL),
 (13, 'Text', NULL, '1990', 1, NULL, 1, '', 2, 12, 'qweqwewq'),
 (17, 'Exemplo1', NULL, '2000', 4, NULL, 4, '', 22, 19.9, 'Exemplo de form enviada.'),
 (18, 'Livro 1', NULL, '2011', 5, NULL, 8, '', 111, 22, 'Livro 1 exemplo sinopse'),
@@ -223,8 +223,7 @@ ALTER TABLE `livro`
 -- Índices para tabela `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`usuario_id`),
-  ADD UNIQUE KEY `cpf` (`cpf`);
+  ADD PRIMARY KEY (`usuario_id`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -284,7 +283,6 @@ ALTER TABLE `livro`
   ADD CONSTRAINT `livro_ibfk_1` FOREIGN KEY (`editora_id`) REFERENCES `editora` (`editora_id`),
   ADD CONSTRAINT `livro_ibfk_2` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`categoria_id`),
   ADD CONSTRAINT `livro_ibfk_3` FOREIGN KEY (`autor_id`) REFERENCES `autor` (`autor_id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
