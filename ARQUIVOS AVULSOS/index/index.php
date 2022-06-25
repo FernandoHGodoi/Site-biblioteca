@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="index.php"><img src="assets/logo.png" width="192"></a>
+                <a class="navbar-brand" href="index.php"><img src="assets/localivros-branco.png" width="75px"></a>
                 <a class="btn btn-primary" href="../pages/autenticacao/login.php">Login</a>
             </div>
         </nav>
