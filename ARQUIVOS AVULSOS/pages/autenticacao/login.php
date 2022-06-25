@@ -16,7 +16,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="icon" type="image/png" href="../../assets/e-book.png" />
+    <link rel="icon" type="image/png" href="../../index/assets/e-book.png" />
 
   </head>
   <body>
