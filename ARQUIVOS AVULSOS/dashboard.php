@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
+<html lang="pt-br">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -20,17 +20,18 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="icon" type="image/png" href="assets/e-book.png" sizes="32x32"/>
+    <link rel="shortcut icon" href="assets/images/book-open-solid.svg" />
   </head>
   <body>
 
     <div class="container-scroller">
+      <!-- partial:partials/_navbar.php -->
+      <?php include 'partials/_navbar.php' ?>
       <!-- partial:partials/_sidebar.php -->
       <?php include 'partials/_sidebar.php' ?>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.php -->
-        <?php include 'partials/_navbar.php' ?>
+        
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
