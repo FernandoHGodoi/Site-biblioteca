@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
+<html lang="pt-br">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -49,7 +49,7 @@
                     <button type="submit" form_id="login" class="btn btn-primary btn-block enter-btn">Login</button>
                   </div>
                   
-                  <a href="../../index/index.php"><- Voltar a Home</a>
+                  <a href="../../index.php"><- Voltar a Home</a>
                 </form>
               </div>
             </div>
