@@ -46,7 +46,7 @@
                     <a href="redefinir.php" class="forgot-pass">Esqueci a senha</a>
                   </div>
                   <div class="text-center">
-                    <button type="submit" form_id="login" class="btn btn-primary btn-block enter-btn">Login</button>
+                    <button type="submit" form_id="login" name="entrar" class="btn btn-primary btn-block enter-btn">Login</button>
                   </div>
                   
                   <a href="../../index.php"><- Voltar a Home</a>
