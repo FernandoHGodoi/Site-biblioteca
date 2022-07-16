@@ -1,3 +1,12 @@
+<?php  
+  include 'acesso_restrito.php';
+  include 'conexao.php';
+  
+  session_start();  
+?>
+
+<br>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
