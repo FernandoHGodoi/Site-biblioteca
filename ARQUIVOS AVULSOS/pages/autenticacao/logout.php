@@ -1,12 +1,15 @@
 <?php
-
-	// Se o usuário não está logado, manda para página de login.
-
-        setcookie("user", '');
-		
+	session_start();
 	
-		header("Location: login.php");
-		
+	unset(
+		$_SESSION['usuarioId'],
+		$_SESSION['usuarioNome'],
+		$_SESSION['usuarioTipo'],
+		$_SESSION['usuarioEmail'],
+		$_SESSION['usuarioSenha']
+	);
 	
-
+	$_SESSION['logindeslogado'] = "Deslogado com sucesso";
+	//redirecionar o usuario para a página de login
+	header("Location: ../../index.php");
 ?>

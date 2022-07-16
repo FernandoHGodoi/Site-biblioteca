@@ -1,12 +1,19 @@
 <?php
+    
+    $teste = $_COOKIE['user'];
 
 	// Se o usuário não está logado, manda para página de login.
-	if (!isset($_SESSION['user'])){
+	if($teste == ""){
 		
+		echo "erro";
+		//$_SESSION['msgerro'] = "Sessão expirada!";
+		header("Location: http://localhost/curso_php/biblioteca/template/pages/autenticacao/login.php?");
 		
-		$_SESSION['msgerro'] = "Sessão expirada!";
-		header("Location: login.php");
-		
-	};
+	}else{
+
+        echo $_COOKIE['user'];
+
+    };
+    
 
 ?>
