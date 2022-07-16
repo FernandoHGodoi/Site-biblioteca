@@ -22,6 +22,6 @@
     mysqli_close($conn);
 
     //A PÁGINA É ATUALIZADA
-    header('location: cad_livro.php');
+    header('location: ../../dashboard.php');
 
 ?>

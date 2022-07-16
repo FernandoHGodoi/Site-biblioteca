@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Atualizar livro</title>
+    <title>Atualizar cliente</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -43,58 +43,66 @@
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">ATUALIZAR LIVRO</h4>
+                                <h4 class="card-title">ATUALIZAR CLIENTE</h4>
                                 <!-- CONEXAO COM O BANCO -->
                                 <?php include '../../conexao.php' ?>
 <!-------------------------------------------------------------------------------------------------------------->
                                 <!-- INICIO DA TABLE -->
-                                <table id="atualiza_livro" class="" width="100%">
+                                <table id="atualiza_usuario" class="" width="100%">
                                   <thead>
                                     <tr>
-                                      <th>Título</th>
-                                      <th>Autor</th>
-                                      <th>Editora</th>
-                                      <th>Ano</th>
-                                      <th>Sinopse</th>
-                                      <th>Capa</th>
-                                      <th>Valor aluguel</th>
-                                      <th>Quantidade</th>
+                                      <th>Nome</th>
+                                      <th>Nascimento</th>
+                                      <th>Sexo</th>
+                                      <th>CPF</th>
+                                      <th>Email</th>
+                                      <th>Telefone</th>
+                                      <th>Rua</th>
+                                      <th>Número</th>
+                                      <th>Bairro</th>
+                                      <th>Cidade</th>
+                                      <th>Estado</th>
                                       
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <?php
-                                      $result_atualiza_livro = "SELECT `nm_livro`, `autor_id`, `editora_id`, `ano`, `sinopse`, 
-                                      `capa`, `preco`, quantidade FROM `livro`";
+                                      $result_atualiza_usuario = "SELECT `nm_usuario`,`dt_nascimento`,`sexo`,`cpf`,`email`,
+                                      `telefone`,`rua`,`numero`,`bairro`,`cidade`,`estado` FROM `usuario`";
 
-                                      $resultado_atualiza_livro = mysqli_query($conn, $result_atualiza_livro);
+                                      $resultado_atualiza_usuario = mysqli_query($conn, $result_atualiza_usuario);
                                       
 
-                                      while($rows_resultado = mysqli_fetch_assoc($resultado_atualiza_livro)){ ?>
+                                      while($rows_resultado = mysqli_fetch_assoc($resultado_atualiza_usuario)){ ?>
                                       <tr>
-                                        <td><?php echo $rows_resultado['nm_livro']; ?></td>
-                                        
-                                        <td><?php echo $rows_resultado['autor_id']; ?></td>
-                                        <td><?php echo $rows_resultado['editora_id']; ?></td>
-                                        <td><?php echo $rows_resultado['ano']; ?></td>
-                                        <td><?php echo $rows_resultado['sinopse']; ?></td>
-                                        <td><?php echo $rows_resultado['capa']; ?></td>
-                                        <td><?php echo $rows_resultado['preco']; ?></td>
-                                        <td><?php echo $rows_resultado['quantidade']; ?></td>
+                                        <td><?php echo $rows_resultado['nm_usuario']; ?></td>
+                                        <td><?php echo $rows_resultado['dt_nascimento']; ?></td>
+                                        <td><?php echo $rows_resultado['sexo']; ?></td>
+                                        <td><?php echo $rows_resultado['cpf']; ?></td>
+                                        <td><?php echo $rows_resultado['email']; ?></td>
+                                        <td><?php echo $rows_resultado['telefone']; ?></td>
+                                        <td><?php echo $rows_resultado['rua']; ?></td>
+                                        <td><?php echo $rows_resultado['numero']; ?></td>
+                                        <td><?php echo $rows_resultado['bairro']; ?></td>
+                                        <td><?php echo $rows_resultado['cidade']; ?></td>
+                                        <td><?php echo $rows_resultado['estado']; ?></td>
                                         <td> <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i></button> </td>
                                       </tr>
                                     <?php } ?>
                                   </tbody>
                                   <tfoot>
                                     <tr>
-                                      <th>Título</th>
-                                      <th>Autor</th>
-                                      <th>Editora</th>
-                                      <th>Ano</th>
-                                      <th>Sinopse</th>
-                                      <th>Capa</th>
-                                      <th>Valor aluguel</th>
-                                      <th>Quantidade</th>
+                                    <th>Nome</th>
+                                    <th>Nascimento</th>
+                                    <th>Sexo</th>
+                                    <th>CPF</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Rua</th>
+                                    <th>Número</th>
+                                    <th>Bairro</th>
+                                    <th>Cidade</th>
+                                    <th>Estado</th>
                                     </tr>
                                   </tfoot>
                                 </table>

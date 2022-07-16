@@ -54,7 +54,7 @@
       <span class="nav-link">Navegação</span>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="http://localhost/curso_php/biblioteca/template/dashboard.php">
+      <a class="nav-link" href="../../dashboard.php">
         <span class="menu-icon">
           <i class="mdi mdi-speedometer"></i>
         </span>
@@ -71,8 +71,8 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="http://localhost/curso_php/biblioteca/template/pages/livro/cad_livro.php">Cadastrar</a></li>
-          <li class="nav-item"> <a class="nav-link" href="http://localhost/curso_php/biblioteca/template/pages/livro/atualiza_livro.php">Atualizar</a></li>
+          <li class="nav-item"> <a class="nav-link" href="../livro/cad_livro.php">Cadastrar</a></li>
+          <li class="nav-item"> <a class="nav-link" href="../livro/atualiza_livro.php">Atualizar</a></li>
         </ul>
       </div>
     </li>
@@ -87,8 +87,8 @@
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="http://localhost/curso_php/biblioteca/template/pages/usuario/cad_usuario.php">Cadastrar</a></li>
-          <li class="nav-item"> <a class="nav-link" href="http://localhost/curso_php/biblioteca/template/pages/usuario/atualiza_usuario.php">Atualizar</a></li>
+          <li class="nav-item"> <a class="nav-link" href="cad_usuario.php">Cadastrar</a></li>
+          <li class="nav-item"> <a class="nav-link" href="atualiza_usuario.php">Atualizar</a></li>
         </ul>
       </div>
     </li>

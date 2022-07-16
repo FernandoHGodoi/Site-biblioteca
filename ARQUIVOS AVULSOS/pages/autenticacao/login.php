@@ -29,7 +29,7 @@
                 <h3 class="card-title text-center mb-3">Login</h3>
 
                 <!-- INICIO DO FORM -->
-                <form id="login" action="../../dashboard.php" method="post">
+                <form action="valida_login.php" method="post">
 
                   <!-- EMAIL -->
                   <div class="form-group">
@@ -46,11 +46,12 @@
                     <a href="redefinir.php" class="forgot-pass">Esqueci a senha</a>
                   </div>
                   <div class="text-center">
-                    <button type="submit" form_id="login" name="entrar" class="btn btn-primary btn-block enter-btn">Login</button>
+                    <input type="submit" value="Entrar" class="btn btn-primary btn-block enter-btn"><br>
                   </div>
                   
                   <a href="../../index.php"><- Voltar a Home</a>
                 </form>
+                
               </div>
             </div>
           </div>

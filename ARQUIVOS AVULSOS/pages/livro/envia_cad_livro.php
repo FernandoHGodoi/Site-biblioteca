@@ -1,7 +1,7 @@
 <?php
 
     //CHAMA A PAGINA CONEXAO PARA CONECTAR O ENVIA_FORM COM O BANCO
-    include_once("conexao.php"); 
+    include_once("../../conexao.php"); 
 
     //CRIA VARIAVEIS PARA RECEBEREM OS DADOS DIGITADOS PELO USUARIO
     $titulo = $_POST['nm_livro'];
@@ -21,6 +21,6 @@
     mysqli_close($conn);
 
     //A PÁGINA É ATUALIZADA
-    header('location: cad_livro.php');
+    header('location: ../../dashboard.php');
 
 ?>
