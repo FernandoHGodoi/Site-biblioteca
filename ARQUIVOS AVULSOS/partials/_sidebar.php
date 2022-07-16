@@ -9,13 +9,13 @@
             <span class="count bg-success"></span>
           </div>
           <div class="profile-name">
-            <h5 class="mb-0 font-weight-normal">Usuário</h5>
-            <span>Tipo de funcionário</span>
+            <h5 class="mb-0 font-weight-normal"><?php echo $_SESSION['usuarioNome'];?></h5>
+            <span><?php echo $_SESSION['usuarioTipo'] ?></span>
           </div>
         </div>
         <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
         <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-          <a href="#" class="dropdown-item preview-item">
+          <a href="../../pages/usuario/atualiza_usuario.php" class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
                 <i class="mdi mdi-settings text-primary"></i>
@@ -37,7 +37,7 @@
             </div>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item preview-item">
+          <a href="pages/autenticacao/logout.php" class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
                 <i class="mdi mdi-calendar-today text-success"></i>
@@ -54,7 +54,7 @@
       <span class="nav-link">Navegação</span>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="http://localhost/curso_php/biblioteca/template/dashboard.php">
+      <a class="nav-link" href="../template/dashboard.php">
         <span class="menu-icon">
           <i class="mdi mdi-speedometer"></i>
         </span>
