@@ -1,2 +1,2 @@
 # Site-biblioteca
-Repositório destinado ao TCC
+Repositório destinado ao site de biblioteca
